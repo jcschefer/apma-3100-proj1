@@ -1,6 +1,8 @@
+import random
+
 def rng():
-    # TODO implmenent rng
-    return 0.5
+    # TODO implmenent rng instead of using the library
+    return random.random()
 
 def rvg():
     # TODO implmenent rvg

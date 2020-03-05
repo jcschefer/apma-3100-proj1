@@ -1,12 +1,24 @@
 import random
+import math
+
+x = 1000
+a = 24693
+c = 3517
+K = 2 ** 15
 
 def rng():
-    # TODO implmenent rng instead of using the library
-    return random.random()
+    global x
+    x = (a * x + c) % K
+    return x / K
+
+
+LAMBDA = 1 / 12 # expect 1 pickup every 12 minutes
 
 def rvg():
-    # TODO implmenent rvg
-    return 0.5
+    '''
+    Computes a data point in an exponential random variable with mean 12
+    '''
+    return -1 * math.log(1 - rng()) / LAMBDA
 
 
 if __name__ == '__main__':

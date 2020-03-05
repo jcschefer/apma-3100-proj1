@@ -7,6 +7,10 @@ T_DETECT_BUSY = 3
 T_MAX_WAIT = 25
 T_END_CALL = 1
 
+w5 = 50
+w6 = 60
+w7 = 70
+
 def main():
     # generate date
     trials = []
@@ -14,6 +18,22 @@ def main():
         trials.append(simulate_one_customer())
     
     # calculate statistics
+    trials.sort()
+    print('average:\t', sum(trials) / SIMULATION_TRIALS)
+    print('median:\t\t', trials[SIMULATION_TRIALS // 2])
+    print('25% quart:\t', trials[1 * SIMULATION_TRIALS // 4])
+    print('75% quart:\t', trials[3 * SIMULATION_TRIALS // 4])
+
+    print('P[W <= 15]:\t', sum(1 if trial <= 15 else 0 for trial in trials) / SIMULATION_TRIALS)
+    print('P[W <= 20]:\t', sum(1 if trial <= 20 else 0 for trial in trials) / SIMULATION_TRIALS)
+    print('P[W <= 30]:\t', sum(1 if trial <= 30 else 0 for trial in trials) / SIMULATION_TRIALS)
+    print('P[W >  40]:\t', sum(1 if trial >  40 else 0 for trial in trials) / SIMULATION_TRIALS)
+
+    print()
+    print('TODO figure out w5, w6, w7')
+    print('P[W >  w5]:\t', sum(1 if trial > w5 else 0 for trial in trials) / SIMULATION_TRIALS)
+    print('P[W >  w6]:\t', sum(1 if trial > w6 else 0 for trial in trials) / SIMULATION_TRIALS)
+    print('P[W >  w7]:\t', sum(1 if trial > w7 else 0 for trial in trials) / SIMULATION_TRIALS)
 
 
 def simulate_one_customer():

@@ -23,7 +23,7 @@ def rvg():
 
 if __name__ == '__main__':
     '''
-    Do testing relating to expected first three terms, then print out the required terms.
+    Do testing related to expected first three terms, then print out the required terms.
     '''
     random_nums = [rng() for i in range(55)]
     assert abs(random_nums[0] - 0.6779) < 0.0001, 'First term ({}) incorrect'.format(random_nums[0])

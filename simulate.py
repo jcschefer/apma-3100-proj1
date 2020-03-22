@@ -16,7 +16,7 @@ def main():
     trials = []
     for i in range(SIMULATION_TRIALS):
         trials.append(simulate_one_customer())
-    
+
     # calculate statistics
     trials.sort()
     print('average:\t', sum(trials) / SIMULATION_TRIALS)
@@ -35,6 +35,22 @@ def main():
     print('P[W >  w6]:\t', sum(1 if trial > w6 else 0 for trial in trials) / SIMULATION_TRIALS)
     print('P[W >  w7]:\t', sum(1 if trial > w7 else 0 for trial in trials) / SIMULATION_TRIALS)
 
+    try:
+        import matplotlib.pyplot as plt
+        PLOT_MAX_SECONDS = 150
+        PLOT_POINTS_PER_SECOND = 2
+        plot_x = [x / PLOT_POINTS_PER_SECOND for x in range(PLOT_MAX_SECONDS * PLOT_POINTS_PER_SECOND)]
+        plot_y = []
+        for x_val in plot_x:
+            plot_y.append(sum(1 if trial <= x_val else 0 for trial in trials) / SIMULATION_TRIALS)
+
+        plt.plot(plot_x, plot_y)
+        plt.title('')
+        plt.xlabel('Time spent on a given customer, w')
+        plt.ylabel('CDF P[W < w]')
+        plt.show()
+    except:
+        print('you don\'t have matplotlib :( can\'t graph the CDF')
 
 def simulate_one_customer():
     '''

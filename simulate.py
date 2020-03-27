@@ -37,13 +37,14 @@ def main():
 
     try:
         import matplotlib.pyplot as plt
-        PLOT_MAX_SECONDS = 150
-        PLOT_POINTS_PER_SECOND = 2
+        PLOT_MAX_SECONDS = 130
+        PLOT_POINTS_PER_SECOND = 1
         plot_x = [x / PLOT_POINTS_PER_SECOND for x in range(PLOT_MAX_SECONDS * PLOT_POINTS_PER_SECOND)]
         plot_y = []
         for x_val in plot_x:
             plot_y.append(sum(1 if trial <= x_val else 0 for trial in trials) / SIMULATION_TRIALS)
 
+        print(plot_x, plot_y)
         plt.plot(plot_x, plot_y)
         plt.title('')
         plt.xlabel('Time spent on a given customer, w')
